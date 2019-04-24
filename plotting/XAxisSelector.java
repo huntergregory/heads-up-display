@@ -7,17 +7,17 @@ import javafx.scene.control.ComboBox;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * A LabeledVBox that contains a dropdown selector listing all possible NumericalDataTracker.
  *
  * @author Hunter Gregory
  */
-public class XAxisSelector extends LabeledVBox {
+public class XAxisSelector extends LabeledComboBox {
     private static final String DESCRIPTION = "Select X data";
-    private static final int NUM_OPTIONS_SHOWN = 4;
 
-    private ComboBox<String> myDropBox;
     private NumericalDataTracker[] myTrackers;
 
     /**
@@ -27,33 +27,17 @@ public class XAxisSelector extends LabeledVBox {
     public XAxisSelector(NumericalDataTracker ... trackers) {
         super(DESCRIPTION);
         myTrackers = trackers;
-        constructDropBox();
     }
 
-    private void constructDropBox() {
-        myDropBox = new ComboBox<>();
-        myDropBox.setEditable(false);
-        myDropBox.itemsProperty().set(getItemList());
-        myDropBox.setVisibleRowCount(NUM_OPTIONS_SHOWN);
-        myDropBox.getSelectionModel().selectFirst();
-    }
-
-    private ObservableList<String> getItemList() {
-        ArrayList<String> itemList = new ArrayList<>();
-        Arrays.stream(myTrackers).forEach(tracker -> itemList.add(tracker.getDataName()));
-        return FXCollections.observableArrayList(itemList);
+    @Override
+    protected List<String> getItems() {
+        return Arrays.stream(myTrackers).map(tracker -> tracker.getDataName()).collect(Collectors.toList());
     }
 
     /**
      * @return the currently selected NumericalDataTracker
      */
     public NumericalDataTracker getSelectedTracker() {
-        int index = myDropBox.getSelectionModel().getSelectedIndex();
-        return myTrackers[index];
-    }
-
-    @Override
-    protected Node getMainComponent() {
-        return myDropBox;
+        return myTrackers[getSelectedIndex()];
     }
 }
