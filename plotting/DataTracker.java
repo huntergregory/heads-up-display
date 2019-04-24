@@ -50,4 +50,11 @@ public class DataTracker<T> {
     public T getLatestValue() {
         return myData.get(myData.size() - 1);
     }
+
+    /**
+     * @return number of data values tracked
+     */
+    public int size() {
+        return myData.size();
+    }
 }

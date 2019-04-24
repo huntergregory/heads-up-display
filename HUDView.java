@@ -26,8 +26,6 @@ public class HUDView {
     private static final double INTER_VALUES_SPACING = 2;
     private static final double PLOT_VALUES_SPACING = 20;
 
-    private double myWidth;
-    private double myHeight;
     private DataTracker[] myTrackers;
     private Label[] myDataLabels;
     private Label myTitle;
@@ -46,15 +44,12 @@ public class HUDView {
      * @param trackers
      */
     public HUDView(double width, double height, String title, boolean includePlots, DataTracker ... trackers) {
-        myWidth = width;
-        myHeight = height;
-        createTitle(title);
         myTrackers = trackers;
-        myPlotter = new Plotter(myWidth, myHeight, filterTrackers(myTrackers));
-        setPlotsIncluded(includePlots);
         createVBoxes();
-        addLabels();
-        createScrollPane();
+        addLabels(title);
+        createScrollPane(width, height);
+        myPlotter = new Plotter(width, height, filterTrackers(myTrackers));
+        setPlotsIncluded(includePlots);
         update();
     }
 
@@ -83,7 +78,8 @@ public class HUDView {
         clearText();
         for (int k = 0; k< myTrackers.length; k++) {
             var tracker = myTrackers[k];
-            myDataLabels[k].setText(tracker.getDataName() + ": " + tracker.getLatestValue().toString());
+            String value = tracker.size() == 0 ? "" : tracker.getLatestValue().toString();
+            myDataLabels[k].setText(tracker.getDataName() + ": " + value);
         }
 
         if (myPlotter != null)
@@ -113,13 +109,11 @@ public class HUDView {
         myPlotsIncluded = include;
     }
 
-    private void createTitle(String title) {
+
+    private void addLabels(String title) {
         myTitle = new Label(title);
         myTitle.setStyle(DATA_LABEL_CLASS_CSS);
         myTitle.setId(TITLE_ID_CSS);
-    }
-
-    private void addLabels() {
         myHudValuesBox.getChildren().add(myTitle);
 
         myDataLabels = new Label[myTrackers.length];
@@ -131,20 +125,20 @@ public class HUDView {
         }
     }
 
-    private void createScrollPane() {
+    private void createScrollPane(double width, double height) {
         myScrollPane = new ScrollPane(myPlotAndValuesBox);
         myScrollPane.setStyle(SCROLL_PANE_CLASS_CSS);
-        setDimensions(myScrollPane);
+        setDimensions(myScrollPane, width, height);
         myScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         myScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         myScrollPane.setDisable(false);
     }
 
-    private void setDimensions(Region region) {
-        region.setMaxHeight(myHeight);
-        region.setMinHeight(myHeight);
-        region.setMinWidth(myWidth);
-        region.setMaxWidth(myWidth);
+    private void setDimensions(Region region, double width, double height) {
+        region.setMaxHeight(height);
+        region.setMinHeight(height);
+        region.setMinWidth(width);
+        region.setMaxWidth(width);
     }
 
     private void clearText() {
