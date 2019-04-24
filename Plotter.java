@@ -1,5 +1,8 @@
-package hud.plotting;
+package hud;
 
+import hud.selectors.ChartTypeSelector;
+import hud.selectors.XAxisSelector;
+import hud.selectors.YAxisSelector;
 import javafx.scene.chart.XYChart;
 import javafx.geometry.Pos;
 import javafx.scene.Node;

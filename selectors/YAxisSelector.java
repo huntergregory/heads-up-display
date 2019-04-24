@@ -1,5 +1,6 @@
-package hud.plotting;
+package hud.selectors;
 
+import hud.NumericalDataTracker;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.VBox;

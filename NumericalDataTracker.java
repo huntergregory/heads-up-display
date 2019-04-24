@@ -1,4 +1,4 @@
-package hud.plotting;
+package hud;
 
 /**
  * A DataTracker that's guaranteed to have numerical data.

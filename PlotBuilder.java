@@ -1,4 +1,4 @@
-package hud.plotting;
+package hud;
 
 import javafx.scene.chart.*;
 

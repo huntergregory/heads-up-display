@@ -1,4 +1,4 @@
-package hud.plotting;
+package hud.selectors;
 
 import javafx.scene.Node;
 import javafx.scene.control.Label;

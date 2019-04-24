@@ -1,4 +1,4 @@
-package hud.plotting;
+package hud.selectors;
 
 import javafx.collections.FXCollections;
 import javafx.scene.Node;

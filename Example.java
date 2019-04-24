@@ -10,7 +10,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import hud.plotting.DataTracker;
 
 /**
  * A template for an example application that runs a game with a Heads Up Display with built-in, GUI controllable plotting features.

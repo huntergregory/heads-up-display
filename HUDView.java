@@ -1,8 +1,5 @@
 package hud;
 
-import hud.plotting.NumericalDataTracker;
-import hud.plotting.Plotter;
-import hud.plotting.DataTracker;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
