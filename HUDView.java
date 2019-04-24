@@ -4,6 +4,7 @@ import hud.plotting.NumericalDataTracker;
 import hud.plotting.Plotter;
 import hud.plotting.DataTracker;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Region;
@@ -25,6 +26,8 @@ public class HUDView {
     private static final String SCROLL_PANE_CLASS_CSS = "scroll-pane";
     private static final double INTER_VALUES_SPACING = 2;
     private static final double PLOT_VALUES_SPACING = 20;
+    private static final String PLOTS_HIDDEN_TEXT = "Show Plot";
+    private static final String PLOTS_SHOWING_TEXT = "Hide Plot";
 
     private DataTracker[] myTrackers;
     private Label[] myDataLabels;
@@ -34,6 +37,7 @@ public class HUDView {
     private VBox myPlotAndValuesBox;
     private Plotter myPlotter;
     private boolean myPlotsIncluded = false;
+    private Button myPlotToggleButton;
 
     /**
      * Create a HUDView
@@ -46,22 +50,12 @@ public class HUDView {
     public HUDView(double width, double height, String title, boolean includePlots, DataTracker ... trackers) {
         myTrackers = trackers;
         createVBoxes();
+        addToggle();
         addLabels(title);
         createScrollPane(width, height);
         myPlotter = new Plotter(width, height, filterTrackers(myTrackers));
         setPlotsIncluded(includePlots);
         update();
-    }
-
-    private NumericalDataTracker[] filterTrackers(DataTracker[] trackers) {
-        return Arrays.stream(trackers).filter(tracker -> tracker instanceof NumericalDataTracker).toArray(NumericalDataTracker[]::new);
-    }
-
-    private void createVBoxes() {
-        myHudValuesBox = new VBox();
-        myHudValuesBox.setSpacing(INTER_VALUES_SPACING);
-        myPlotAndValuesBox = new VBox(myHudValuesBox);
-        myPlotAndValuesBox.setSpacing(PLOT_VALUES_SPACING);
     }
 
     /**
@@ -94,10 +88,25 @@ public class HUDView {
         myTitle.setText(title);
     }
 
-    /**
-     * Include plots if not included and vice versa.
-     */
-    public void togglePlotsIncluded() {
+    private NumericalDataTracker[] filterTrackers(DataTracker[] trackers) {
+        return Arrays.stream(trackers).filter(tracker -> tracker instanceof NumericalDataTracker).toArray(NumericalDataTracker[]::new);
+    }
+
+    private void createVBoxes() {
+        myHudValuesBox = new VBox();
+        myHudValuesBox.setSpacing(INTER_VALUES_SPACING);
+        myPlotAndValuesBox = new VBox(myHudValuesBox);
+        myPlotAndValuesBox.setSpacing(PLOT_VALUES_SPACING);
+    }
+
+    private void addToggle() {
+        myPlotToggleButton = new Button();
+        myPlotToggleButton.setOnAction(e -> togglePlotsIncluded());
+        updateButtonAppearance();
+        myPlotAndValuesBox.getChildren().add(myPlotToggleButton);
+    }
+
+    private void togglePlotsIncluded() {
         setPlotsIncluded(!myPlotsIncluded);
     }
 
@@ -107,6 +116,14 @@ public class HUDView {
         else if (!include && myPlotsIncluded)
             myPlotAndValuesBox.getChildren().remove(myPlotter.getNode());
         myPlotsIncluded = include;
+        updateButtonAppearance();
+    }
+
+    private void updateButtonAppearance() {
+        if (!myPlotsIncluded)
+            myPlotToggleButton.setText(PLOTS_HIDDEN_TEXT);
+        else
+            myPlotToggleButton.setText(PLOTS_SHOWING_TEXT);
     }
 
 
