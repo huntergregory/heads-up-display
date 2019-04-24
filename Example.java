@@ -10,16 +10,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import hud.plotting.Plotter;
 import hud.plotting.DataTracker;
 
 /**
- * An example application that runs a game using a game loop and:
- *  - includes a HUD in the display
- *  - updates the HUD in the game loop every so often
- *
- * HUD can either include a plot of data that's being tracked,
- * or can place that plot outside of the hud on the opposite side of the screen.
+ * A template for an example application that runs a game with a Heads Up Display with built-in, GUI controllable plotting features.
  *
  * @author Hunter Gregory
  */
