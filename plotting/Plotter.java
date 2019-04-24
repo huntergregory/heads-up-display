@@ -59,12 +59,16 @@ public class Plotter {
         var axesSelection = new HBox(myYAxisSelector.getVBox(), myXAxisSelector.getVBox());
         axesSelection.setSpacing(HORIZONTAL_SPACING);
         axesSelection.setAlignment(Pos.CENTER);
-        myVBox = new VBox(getCurrentGraph(), myChartSelector.getVBox(), axesSelection);
+
+        var chartVBox = myChartSelector.getVBox();
+        chartVBox.setAlignment(Pos.CENTER);
+
+        myVBox = new VBox(getCurrentGraph(), chartVBox, axesSelection);
         myVBox.setSpacing(VERTICAL_SPACING);
     }
 
     private XYChart<Number, Number> getCurrentGraph() {
         var plotBuilder = new PlotBuilder(myWidth, myHeight, myChartSelector.getSelectedChart(), myXAxisSelector.getSelectedTracker(), myYAxisSelector.getSelectedTrackers());
-        return plotBuilder.createPlot("Area"); //FIXME hardcode
+        return plotBuilder.createPlot();
     }
 }

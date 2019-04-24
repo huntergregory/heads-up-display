@@ -7,6 +7,7 @@ import javafx.scene.chart.*;
  * @author Carter Gay
  */
 public class PlotBuilder {
+    private static final String CHOOSE_Y_MESSAGE = "Please select y";
 
     private NumericalDataTracker<Double> myX;
     private NumericalDataTracker<Double>[] myY;
@@ -14,6 +15,7 @@ public class PlotBuilder {
     private double myHeight;
     private NumberAxis myXAxis;
     private NumberAxis myYAxis;
+    private Class<? extends XYChart> myChartClass;
 
 
     /**
@@ -23,7 +25,7 @@ public class PlotBuilder {
      * @param x
      * @param y
      */
-    public PlotBuilder( double width, double height, NumericalDataTracker x, NumericalDataTracker ... y) {
+    public PlotBuilder( double width, double height, Class<? extends XYChart> chartClass, NumericalDataTracker x, NumericalDataTracker ... y) {
         myX = x;
         myY = y;
         myWidth = width;
@@ -31,38 +33,44 @@ public class PlotBuilder {
         myXAxis = new NumberAxis();
         myXAxis.setLabel(x.getDataName());
         myYAxis = new NumberAxis();
+        myChartClass = chartClass;
     }
 
     /**
      * Creates the scatter plot of the passed in x and y features with appropriate titles/labels
      * @return
      */
-    public XYChart<Number,Number> createPlot(String plotType) {
+    public XYChart<Number,Number> createPlot() {
         XYChart myPlot;
-        if (plotType == "Scatter") {
+        try {
+            System.out.println(myChartClass);
+            myPlot = myChartClass.getDeclaredConstructor(Axis.class, Axis.class).newInstance(myXAxis, myYAxis);
+            System.out.println("here");
+        }
+        catch (Exception e) { //TODO incorporate Professor Duvall's reflection utility (like ReflectionException)
             myPlot = new ScatterChart<>(myXAxis, myYAxis);
         }
-        else if (plotType == "Line") {
-            myPlot = new LineChart<>(myXAxis, myYAxis);
-        }
-        else  {
-            myPlot = new AreaChart<>(myXAxis, myYAxis);
-        }
-        myPlot.setMaxWidth(myWidth);
-        myPlot.setMaxHeight(myHeight);
+
+        setChartAttributes(myPlot);
         if (myY.length != 0)
-            plotData(myYAxis, myPlot);
+            plotData(myPlot);
         else
-            myPlot.setTitle("Please select y");
+            myPlot.setTitle(CHOOSE_Y_MESSAGE);
         return myPlot;
     }
 
-    private void plotData(NumberAxis yAxis, XYChart<Number, Number> myPlot) {
+    private void setChartAttributes(XYChart myPlot) {
+        myPlot.setMaxWidth(myWidth);
+        myPlot.setMaxHeight(myHeight);
+        myPlot.setAnimated(false);
+    }
+
+    private void plotData(XYChart<Number, Number> myPlot) {
         String yString = myY[0].getDataName();
         for (int k = 1; k < myY.length; k++) {
             yString += ", " + myY[k].getDataName();
         }
-        yAxis.setLabel(yString);
+        myYAxis.setLabel(yString);
         myPlot.setTitle(yString + " vs " + myX.getDataName());
         var xData = myX.getData();
         for (int i = 0; i < myY.length; i++) {
