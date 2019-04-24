@@ -105,11 +105,11 @@ public class Example extends Application {
 
     //TODO include your own trackers
     private void initDataTrackers() {
-        myXPosTracker = new DataTracker("X Position");
-        myYPosTracker = new DataTracker("Y Position");
-        myTimeTracker = new DataTracker("Time");
-        myLivesTracker = new DataTracker("Lives");
-        myPowerupTracker = new DataTracker("Powerup");
+        myXPosTracker = new DataTracker<>("X Position");
+        myYPosTracker = new DataTracker<>("Y Position");
+        myTimeTracker = new DataTracker<>("Time");
+        myLivesTracker = new DataTracker<>("Lives");
+        myPowerupTracker = new DataTracker<>("Powerup");
     }
 
     //TODO include your own trackers and update data trackers with real values
