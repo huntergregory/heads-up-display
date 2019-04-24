@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 /**
  * A tool for displaying a plot with axes specified by a mini GUI.
- * Combines the functionality of XAxisSelector, YAxisSelector, and PlotBuilder into one displayable entity.
  * Doesn't plot any categorical data (strictly uses NumericalDataTrackers).
  *
  * @author Hunter Gregory
@@ -21,6 +20,7 @@ public class Plotter {
 
     private XAxisSelector myXAxisSelector;
     private YAxisSelector myYAxisSelector;
+    private ChartTypeSelector myChartSelector;
     private VBox myVBox;
     private double myWidth;
     private double myHeight;
@@ -36,6 +36,7 @@ public class Plotter {
         myHeight = height;
         myXAxisSelector = new XAxisSelector(trackers);
         myYAxisSelector = new YAxisSelector(trackers);
+        myChartSelector = new ChartTypeSelector();
         setupDisplay();
         updateGraph();
     }
@@ -55,15 +56,15 @@ public class Plotter {
     }
 
     private void setupDisplay() {
-        var miniGUI = new HBox(myYAxisSelector.getVBox(), myXAxisSelector.getVBox());
-        miniGUI.setSpacing(HORIZONTAL_SPACING);
-        miniGUI.setAlignment(Pos.CENTER);
-        myVBox = new VBox(getCurrentGraph(), miniGUI);
+        var axesSelection = new HBox(myYAxisSelector.getVBox(), myXAxisSelector.getVBox());
+        axesSelection.setSpacing(HORIZONTAL_SPACING);
+        axesSelection.setAlignment(Pos.CENTER);
+        myVBox = new VBox(getCurrentGraph(), myChartSelector.getVBox(), axesSelection);
         myVBox.setSpacing(VERTICAL_SPACING);
     }
 
     private XYChart<Number, Number> getCurrentGraph() {
-        var plotBuilder = new PlotBuilder(myWidth, myHeight, myXAxisSelector.getSelectedTracker(), myYAxisSelector.getSelectedTrackers());
+        var plotBuilder = new PlotBuilder(myWidth, myHeight, myChartSelector.getSelectedChart(), myXAxisSelector.getSelectedTracker(), myYAxisSelector.getSelectedTrackers());
         return plotBuilder.createPlot("Area"); //FIXME hardcode
     }
 }
