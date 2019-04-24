@@ -41,7 +41,6 @@ public class Example extends Application {
     //add private instance variable of engine
     private Pane myGameRoot;
 
-    private Plotter myPlotter;
     private DataTracker<Double> myXPosTracker;
     private DataTracker<Double> myYPosTracker;
     private DataTracker<Double> myTimeTracker;

@@ -31,12 +31,11 @@ public class Plotter {
      * @param height
      * @param trackers
      */
-    public Plotter(double width, double height, DataTracker ... trackers) {
+    public Plotter(double width, double height, DataTracker<Double> ... trackers) {
         myWidth = width;
         myHeight = height;
-        DataTracker[] filtered = filterTrackers(trackers);
-        myXAxisSelector = new XAxisSelector(filtered);
-        myYAxisSelector = new YAxisSelector(filtered);
+        myXAxisSelector = new XAxisSelector(trackers);
+        myYAxisSelector = new YAxisSelector(trackers);
         setupDisplay();
         updateGraph();
     }
@@ -53,15 +52,6 @@ public class Plotter {
      */
     public Node getNode() {
         return myVBox;
-    }
-
-    private DataTracker[] filterTrackers(DataTracker[] trackers) {
-        ArrayList<DataTracker> filtered = new ArrayList<>();
-        for (DataTracker tracker : trackers) {
-            if (tracker.isNumerical())
-                filtered.add(tracker);
-        }
-        return filtered.toArray(new DataTracker[0]);
     }
 
     private void setupDisplay() {

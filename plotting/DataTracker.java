@@ -11,14 +11,14 @@ import java.util.ArrayList;
 public class DataTracker<T> {
 
     private ArrayList<T> myData;
-    private String dataName;
+    private String myDataName;
 
     /**
      * DataTracker constructor where the name identifies the variable stored
      * @param name
      */
     public DataTracker(String name) {
-        dataName = name;
+        myDataName = name;
         myData = new ArrayList<>();
     }
 
@@ -35,7 +35,7 @@ public class DataTracker<T> {
      * @return
      */
     public String getDataName() {
-        return dataName;
+        return myDataName;
     }
 
     /**

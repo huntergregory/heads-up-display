@@ -8,6 +8,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -55,6 +56,15 @@ public class HUDView {
         addLabels();
         createScrollPane(width, height);
         update();
+    }
+
+    private DataTracker[] filterTrackers(DataTracker[] trackers) {
+        ArrayList<DataTracker> filtered = new ArrayList<>();
+        for (DataTracker tracker : trackers) {
+            if (tracker.isNumerical())
+                filtered.add(tracker);
+        }
+        return filtered.toArray(new DataTracker[0]);
     }
 
     private void createVBoxes() {
