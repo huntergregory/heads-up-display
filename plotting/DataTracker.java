@@ -1,7 +1,5 @@
 package hud.plotting;
 
-import hud.CategoricalDataException;
-
 import java.util.ArrayList;
 
 /**
