@@ -49,7 +49,7 @@ public class HUDView {
         createTitle(title);
         myTrackers = trackers;
         if (includePlots) {
-            myPlotter = new Plotter(width, height, myTrackers);
+            myPlotter = new Plotter(width, height, filterTrackers(myTrackers));
             myPlotAndValuesBox.getChildren().add(myPlotter.getNode());
         }
         createVBoxes();
@@ -59,12 +59,7 @@ public class HUDView {
     }
 
     private DataTracker[] filterTrackers(DataTracker[] trackers) {
-        ArrayList<DataTracker> filtered = new ArrayList<>();
-        for (DataTracker tracker : trackers) {
-            if (tracker.isNumerical())
-                filtered.add(tracker);
-        }
-        return filtered.toArray(new DataTracker[0]);
+        return Arrays.stream(trackers).filter(DataTracker::isNumerical).toArray(DataTracker[]::new);
     }
 
     private void createVBoxes() {
