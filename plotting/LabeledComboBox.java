@@ -21,6 +21,8 @@ public abstract class LabeledComboBox<T> extends LabeledVBox {
     abstract protected List<String> getItems();
 
     protected int getSelectedIndex() {
+        if (myDropBox == null)
+            return 0;
         return myDropBox.getSelectionModel().getSelectedIndex();
     }
 
