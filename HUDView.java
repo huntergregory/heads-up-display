@@ -15,7 +15,7 @@ import java.util.Arrays;
 /**
  * A Heads Up Display utility with customizable data and an optional Plotter for visualizing data.
  * Game loop is expected to store data in DataTrackers and call update on the HUDView to reflect the current values of data being stored.
- * The HUDView passes along any NumericalDataTrackers to the Plotter if plots are included in the constructor.
+ * The HUDView passes along any NumericalDataTrackers to the Plotter.
  *
  * @author Hunter Gregory
  * @author Carter Gay

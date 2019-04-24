@@ -13,6 +13,10 @@ public abstract class LabeledVBox {
     private VBox myVBox;
     private String myLabelText;
 
+    /**
+     * Create a LabeledVBox
+     * @param labelText
+     */
     public LabeledVBox(String labelText) {
         myLabelText = labelText;
     }

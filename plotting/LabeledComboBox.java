@@ -6,11 +6,18 @@ import javafx.scene.control.ComboBox;
 
 import java.util.List;
 
-public abstract class LabeledComboBox<T> extends LabeledVBox {
+/**
+ * A ComboBox with a Label above it. Handles details of creating and handling the ComboBox under the hood.
+ */
+public abstract class LabeledComboBox extends LabeledVBox {
     private static final int NUM_OPTIONS_SHOWN = 4;
 
     private ComboBox<String> myDropBox;
 
+    /**
+     * Create a LabeledComboBox
+     * @param labelText
+     */
     public LabeledComboBox(String labelText) {
         super(labelText);
     }
@@ -20,6 +27,9 @@ public abstract class LabeledComboBox<T> extends LabeledVBox {
      */
     abstract protected List<String> getItems();
 
+    /**
+     * @return index of selected item
+     */
     protected int getSelectedIndex() {
         if (myDropBox == null)
             return 0;

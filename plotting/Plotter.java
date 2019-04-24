@@ -6,10 +6,8 @@ import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.util.ArrayList;
-
 /**
- * A tool for displaying a plot with axes specified by a mini GUI.
+ * A GUI and plot combination. The user can specify the data for the x axis, multiple data for the y axis, and the type of chart to display.
  * Doesn't plot any categorical data (strictly uses NumericalDataTrackers).
  *
  * @author Hunter Gregory

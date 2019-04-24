@@ -5,6 +5,7 @@ import java.util.ArrayList;
 /**
  * This class is used to store data for any type of variable
  * @author Carter Gay
+ * @author Hunter Gregory
  */
 public class DataTracker<T> {
 

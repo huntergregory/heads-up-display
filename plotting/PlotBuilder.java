@@ -5,6 +5,7 @@ import javafx.scene.chart.*;
 /**
  * This class is used to construct plots to dynamically display game variables
  * @author Carter Gay
+ * @author Hunter Gregory
  */
 public class PlotBuilder {
     private static final String CHOOSE_Y_MESSAGE = "Please select y";
@@ -43,9 +44,7 @@ public class PlotBuilder {
     public XYChart<Number,Number> createPlot() {
         XYChart myPlot;
         try {
-            System.out.println(myChartClass);
             myPlot = myChartClass.getDeclaredConstructor(Axis.class, Axis.class).newInstance(myXAxis, myYAxis);
-            System.out.println("here");
         }
         catch (Exception e) { //TODO incorporate Professor Duvall's reflection utility (like ReflectionException)
             myPlot = new ScatterChart<>(myXAxis, myYAxis);
