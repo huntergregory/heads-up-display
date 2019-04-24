@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * A tool for displaying a plot with axes specified by a mini GUI.
  * Combines the functionality of XAxisSelector, YAxisSelector, and PlotBuilder into one displayable entity.
- * Filters out non-numerical DataTrackers passed into the constructor so that the user doesn't have the chance to try to plot categorical data.
+ * Doesn't plot any categorical data (strictly uses NumericalDataTrackers).
  *
  * @author Hunter Gregory
  */
@@ -31,7 +31,7 @@ public class Plotter {
      * @param height
      * @param trackers
      */
-    public Plotter(double width, double height, DataTracker<Double> ... trackers) {
+    public Plotter(double width, double height, NumericalDataTracker ... trackers) {
         myWidth = width;
         myHeight = height;
         myXAxisSelector = new XAxisSelector(trackers);

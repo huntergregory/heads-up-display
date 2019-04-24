@@ -3,7 +3,7 @@ package hud.plotting;
 import java.util.ArrayList;
 
 /**
- * This class is used to store data for a desired numerical variable
+ * This class is used to store data for a desired numerical or categorical variable
  * @author Carter Gay
  */
 public class DataTracker<T> {
@@ -25,7 +25,7 @@ public class DataTracker<T> {
      * @param x
      */
     public void storeData(T x) {
-            myData.add(x);
+        myData.add(x);
     }
 
     /**

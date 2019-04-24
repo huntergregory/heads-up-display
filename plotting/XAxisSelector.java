@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * A LabeledVBox that contains a dropdown selector listing all possible DataTrackers.
+ * A LabeledVBox that contains a dropdown selector listing all possible NumericalDataTracker.
  *
  * @author Hunter Gregory
  */
@@ -18,13 +18,13 @@ public class XAxisSelector extends LabeledVBox {
     private static final int NUM_OPTIONS_SHOWN = 4;
 
     private ComboBox<String> myDropBox;
-    private DataTracker[] myTrackers;
+    private NumericalDataTracker[] myTrackers;
 
     /**
      * Create an XAxisSelector
      * @param trackers
      */
-    public XAxisSelector(DataTracker ... trackers) {
+    public XAxisSelector(NumericalDataTracker ... trackers) {
         super(DESCRIPTION);
         myTrackers = trackers;
         constructDropBox();
@@ -45,9 +45,9 @@ public class XAxisSelector extends LabeledVBox {
     }
 
     /**
-     * @return the currently selected DataTracker
+     * @return the currently selected NumericalDataTracker
      */
-    public DataTracker getSelectedTracker() {
+    public NumericalDataTracker getSelectedTracker() {
         int index = myDropBox.getSelectionModel().getSelectedIndex();
         return myTrackers[index];
     }

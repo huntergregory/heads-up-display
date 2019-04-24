@@ -8,8 +8,8 @@ import javafx.scene.chart.*;
  */
 public class PlotBuilder {
 
-    private DataTracker<Double> myX;
-    private DataTracker<Double>[] myY;
+    private NumericalDataTracker<Double> myX;
+    private NumericalDataTracker<Double>[] myY;
     private double myWidth;
     private double myHeight;
     private NumberAxis myXAxis;
@@ -23,7 +23,7 @@ public class PlotBuilder {
      * @param x
      * @param y
      */
-    public PlotBuilder( double width, double height, DataTracker<Double> x, DataTracker<Double> ... y) {
+    public PlotBuilder( double width, double height, NumericalDataTracker x, NumericalDataTracker ... y) {
         myX = x;
         myY = y;
         myWidth = width;
