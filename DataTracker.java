@@ -1,6 +1,7 @@
 package hud;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class is used to store data for any type of variable
@@ -41,7 +42,7 @@ public class DataTracker<T> {
      * Get the data values as type T
      * @return
      */
-    public ArrayList<T> getData() {
+    public List<T> getData() {
         return myData;
     }
 
