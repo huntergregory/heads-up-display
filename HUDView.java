@@ -3,6 +3,7 @@ package hud;
 import Player.src.Features.Sliders.LivesSlider;
 import Player.src.Features.Sliders.PlayerSlider;
 import Player.src.Features.Sliders.TimeSlider;
+import Player.src.PlayerMain.PlayerStage;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -44,6 +45,7 @@ public class HUDView {
     private Button mySaveButton;
     private LivesSlider myLivesSlider;
     private TimeSlider myTimeSlider;
+    private int gamePaused = 0;
 
     /**
      * Create a HUDView
@@ -123,11 +125,19 @@ public class HUDView {
     }
 
     private void pauseGame() {
-
+        gamePaused = 1;
     }
 
     private void resumeGame() {
+        gamePaused = 0;
+    }
 
+    /**
+     * Return whether the game is paused or active
+     * @return
+     */
+    public int getGamePaused() {
+        return gamePaused;
     }
 
     private void saveGame() {
