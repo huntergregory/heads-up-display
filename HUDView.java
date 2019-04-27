@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
@@ -108,8 +109,12 @@ public class HUDView {
     }
 
     private void addLivesSlider() {
+        Label label = new Label("Select Lives");
+        HBox myBox = new HBox();
+        myBox.getChildren().add(label);
         myLivesSlider = new LivesSlider();
-        myPlotAndValuesBox.getChildren().add(myLivesSlider.getMainComponent());
+        myBox.getChildren().add(myLivesSlider.getMainComponent());
+        myPlotAndValuesBox.getChildren().add(myBox);
     }
 
 
