@@ -2,6 +2,7 @@ package hud;
 
 import Player.src.Features.Sliders.LivesSlider;
 import Player.src.Features.Sliders.PlayerSlider;
+import Player.src.Features.Sliders.TimeSlider;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -38,7 +39,8 @@ public class HUDView {
     private Plotter myPlotter;
     private boolean myPlotsIncluded = false;
     private Button myPlotToggleButton;
-    private PlayerSlider myLivesSlider;
+    private LivesSlider myLivesSlider;
+    private TimeSlider myTimeSlider;
 
     /**
      * Create a HUDView
@@ -52,6 +54,7 @@ public class HUDView {
         myTrackers = trackers;
         createVBoxes();
         addLivesSlider();
+        addTimeSlider();
         addToggle();
         addLabels(title);
         createScrollPane(width, height);
@@ -117,6 +120,14 @@ public class HUDView {
         myPlotAndValuesBox.getChildren().add(myBox);
     }
 
+    private void addTimeSlider() {
+        Label label = new Label("Select Time");
+        HBox myBox = new HBox();
+        myBox.getChildren().add(label);
+        myTimeSlider = new TimeSlider();
+        myBox.getChildren().add(myTimeSlider.getMainComponent());
+        myPlotAndValuesBox.getChildren().add(myBox);
+    }
 
     private void togglePlotsIncluded() {
         setPlotsIncluded(!myPlotsIncluded);
@@ -137,7 +148,6 @@ public class HUDView {
         else
             myPlotToggleButton.setText(PLOTS_SHOWING_TEXT);
     }
-
 
     private void addLabels(String title) {
         myTitle = new Label(title);
