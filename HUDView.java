@@ -1,5 +1,7 @@
 package hud;
 
+import Player.src.Features.Sliders.LivesSlider;
+import Player.src.Features.Sliders.PlayerSlider;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -35,6 +37,7 @@ public class HUDView {
     private Plotter myPlotter;
     private boolean myPlotsIncluded = false;
     private Button myPlotToggleButton;
+    private PlayerSlider myLivesSlider;
 
     /**
      * Create a HUDView
@@ -47,6 +50,7 @@ public class HUDView {
     public HUDView(double width, double height, String title, boolean includePlots, DataTracker ... trackers) {
         myTrackers = trackers;
         createVBoxes();
+        addLivesSlider();
         addToggle();
         addLabels(title);
         createScrollPane(width, height);
@@ -102,6 +106,12 @@ public class HUDView {
         updateButtonAppearance();
         myPlotAndValuesBox.getChildren().add(myPlotToggleButton);
     }
+
+    private void addLivesSlider() {
+        myLivesSlider = new LivesSlider();
+        myPlotAndValuesBox.getChildren().add(myLivesSlider.getMainComponent());
+    }
+
 
     private void togglePlotsIncluded() {
         setPlotsIncluded(!myPlotsIncluded);
