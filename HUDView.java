@@ -1,9 +1,7 @@
 package hud;
 
 import Player.src.Features.Sliders.LivesSlider;
-import Player.src.Features.Sliders.PlayerSlider;
 import Player.src.Features.Sliders.TimeSlider;
-import Player.src.PlayerMain.PlayerStage;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
