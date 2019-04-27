@@ -111,12 +111,27 @@ public class HUDView {
     private void addGameButtons() {
         HBox myBox = new HBox();
         myPauseButton = new Button("PAUSE");
+        myPauseButton.setOnAction(e -> pauseGame());
         myResumeButton = new Button("RESUME");
+        myResumeButton.setOnAction(e -> resumeGame());
         mySaveButton = new Button("SAVE");
+        mySaveButton.setOnAction(e -> saveGame());
         myBox.getChildren().add(myPauseButton);
         myBox.getChildren().add(myResumeButton);
         myBox.getChildren().add(mySaveButton);
         myPlotAndValuesBox.getChildren().add(myBox);
+    }
+
+    private void pauseGame() {
+
+    }
+
+    private void resumeGame() {
+
+    }
+
+    private void saveGame() {
+
     }
 
     private void addLivesSlider() {
