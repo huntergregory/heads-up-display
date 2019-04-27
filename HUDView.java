@@ -39,6 +39,9 @@ public class HUDView {
     private Plotter myPlotter;
     private boolean myPlotsIncluded = false;
     private Button myPlotToggleButton;
+    private Button myPauseButton;
+    private Button myResumeButton;
+    private Button mySaveButton;
     private LivesSlider myLivesSlider;
     private TimeSlider myTimeSlider;
 
@@ -53,6 +56,7 @@ public class HUDView {
     public HUDView(double width, double height, String title, boolean includePlots, DataTracker ... trackers) {
         myTrackers = trackers;
         createVBoxes();
+        addGameButtons();
         addLivesSlider();
         addTimeSlider();
         addToggle();
@@ -104,11 +108,15 @@ public class HUDView {
         myPlotAndValuesBox.setSpacing(PLOT_VALUES_SPACING);
     }
 
-    private void addToggle() {
-        myPlotToggleButton = new Button();
-        myPlotToggleButton.setOnAction(e -> togglePlotsIncluded());
-        updateButtonAppearance();
-        myPlotAndValuesBox.getChildren().add(myPlotToggleButton);
+    private void addGameButtons() {
+        HBox myBox = new HBox();
+        myPauseButton = new Button("PAUSE");
+        myResumeButton = new Button("RESUME");
+        mySaveButton = new Button("SAVE");
+        myBox.getChildren().add(myPauseButton);
+        myBox.getChildren().add(myResumeButton);
+        myBox.getChildren().add(mySaveButton);
+        myPlotAndValuesBox.getChildren().add(myBox);
     }
 
     private void addLivesSlider() {
@@ -127,6 +135,13 @@ public class HUDView {
         myTimeSlider = new TimeSlider();
         myBox.getChildren().add(myTimeSlider.getMainComponent());
         myPlotAndValuesBox.getChildren().add(myBox);
+    }
+
+    private void addToggle() {
+        myPlotToggleButton = new Button();
+        myPlotToggleButton.setOnAction(e -> togglePlotsIncluded());
+        updateButtonAppearance();
+        myPlotAndValuesBox.getChildren().add(myPlotToggleButton);
     }
 
     private void togglePlotsIncluded() {
